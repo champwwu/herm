@@ -27,7 +27,7 @@ This system aggregates order books from multiple cryptocurrency exchanges (Binan
 ## Project Structure
 
 ```
-cinque/
+herm/
 ├── apps/                          # Application executables
 │   ├── aggregator/                # Main aggregation service
 │   ├── publisher/                 # Publisher client service
