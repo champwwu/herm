@@ -221,9 +221,9 @@ See [`tests/integration/README.md`](tests/integration/README.md) for more detail
    
    # Specific service
    docker logs -f aggregator
-   docker logs -f publisher_bbo
-   docker logs -f publisher_price_bands
-   docker logs -f publisher_volume_bands
+   docker logs -f publisher-bbo
+   docker logs -f publisher-price-bands
+   docker logs -f publisher-volume-bands
    ```
 
 4. **Stop services**:
