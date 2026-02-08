@@ -1,0 +1,51 @@
+{
+  "app": {
+    "log": {
+      "file": "logs/handler_client.log",
+      "level": "trace"
+    },
+    "rest_port": 8099,
+    "instrument_registry": "static/instruments.csv"
+  },
+  "market_data": {
+    "binance": {
+      "spot": {
+        "websocket_url_template": "wss://stream.binance.com:9443/ws/{symbol}@depth@100ms",
+        "rest_url": "https://api.binance.com",
+        "rate_limit": {
+          "requests_per_second": 20
+        }
+      },
+      "futures": {
+        "websocket_url_template": "wss://fstream.binance.com/ws/{symbol}@depth@100ms",
+        "rest_url": "https://fapi.binance.com",
+        "rate_limit": {
+          "requests_per_second": 40
+        }
+      }
+    },
+    "bybit": {
+      "spot": {
+        "websocket_url": "wss://stream.bybit.com/v5/public/spot",
+        "rest_url": "https://api.bybit.com",
+        "rate_limit": {
+          "requests_per_second": 40
+        }
+      },
+      "perpetual": {
+        "websocket_url": "wss://stream.bybit.com/v5/public/linear",
+        "rest_url": "https://api.bybit.com",
+        "rate_limit": {
+          "requests_per_second": 40
+        }
+      }
+    },
+    "okx": {
+      "websocket_url": "wss://ws.okx.com:8443/ws/v5/public",
+      "rest_url": "https://www.okx.com",
+      "rate_limit": {
+        "requests_per_second": 40
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "app": {
+    "log": {
+      "file": "logs/publisher_volume_bands.log",
+      "level": "info"
+    },
+    "rest_port": 8083
+  },
+  "strategy": {
+    "aggregator_server": "localhost:50051",
+    "subscribe": [
+      {
+        "request": "VolumeBand",
+        "symbol_root": "BTCUSDT",
+        "notional_volumes": [100000.0, 500000.0, 1000000.0, 2500000.0, 5000000.0]
+      }
+    ]
+  }
+}

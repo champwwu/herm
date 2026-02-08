@@ -1,0 +1,28 @@
+{
+  "app": {
+    "log": {
+      "file": "logs/publisher.log",
+      "level": "trace"
+    },
+    "rest_port": 8085
+  },
+  "strategy": {
+    "aggregator_server": "localhost:50051",
+    "subscribe": [
+      {
+        "request": "BBO",
+        "symbol_root": "BTCUSDT"
+      },
+      {
+        "request": "PriceBand",
+        "symbol_root": "BTCUSDT",
+        "basis_points": [50, 100, 200, 500, 1000]
+      },
+      {
+        "request": "VolumeBand",
+        "symbol_root": "BTCUSDT",
+        "notional_volumes": [1000000.0, 5000000.0, 10000000.0, 25000000.0, 50000000.0]
+      }
+    ]
+  }
+}

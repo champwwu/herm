@@ -1,0 +1,16 @@
+{
+  "bids": [
+    {"price": 50000.0, "quantity": 15.0},
+    {"price": 49999.0, "quantity": 20.0},
+    {"price": 49998.0, "quantity": 25.0},
+    {"price": 49997.0, "quantity": 30.0},
+    {"price": 49996.0, "quantity": 35.0}
+  ],
+  "asks": [
+    {"price": 50001.0, "quantity": 12.0},
+    {"price": 50002.0, "quantity": 18.0},
+    {"price": 50003.0, "quantity": 22.0},
+    {"price": 50004.0, "quantity": 28.0},
+    {"price": 50005.0, "quantity": 32.0}
+  ]
+}

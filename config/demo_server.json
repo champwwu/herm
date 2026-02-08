@@ -1,0 +1,13 @@
+{
+  "app": {
+    "log": {
+      "file": "logs/demo_server.log",
+      "level": "info"
+    },
+    "rest_port": 8097
+  },
+  "server": {
+    "address": "0.0.0.0",
+    "port": 50052
+  }
+}

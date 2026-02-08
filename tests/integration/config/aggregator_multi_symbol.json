@@ -1,0 +1,47 @@
+{
+  "app": {
+    "log": {
+      "file": "logs/aggregator_multi_symbol.log",
+      "level": "trace"
+    },
+    "rest_port": 8080,
+    "instrument_registry": "static/instruments.csv"
+  },
+  "strategy": {
+    "rpc_port": 50051,
+    "symbol": {
+      "BTCUSDT": [
+        "BTCUSDT.SPOT.BNC",
+        "BTCUSDT.SPOT.OKX",
+        "BTCUSDT.SPOT.BYB"
+      ]
+    }
+  },
+  "market_data": {
+    "binance": {
+      "spot": {
+        "websocket_url_template": "wss://localhost:8091/ws/{symbol}@depth@100ms",
+        "rest_url": "https://localhost:8091",
+        "rate_limit": {
+          "requests_per_second": 100
+        }
+      }
+    },
+    "okx": {
+      "websocket_url": "wss://localhost:8092/ws/v5/public",
+      "rest_url": "https://localhost:8092",
+      "rate_limit": {
+        "requests_per_second": 100
+      }
+    },
+    "bybit": {
+      "spot": {
+        "websocket_url": "wss://localhost:8093/v5/public/spot",
+        "rest_url": "https://localhost:8093",
+        "rate_limit": {
+          "requests_per_second": 100
+        }
+      }
+    }
+  }
+}

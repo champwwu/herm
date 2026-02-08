@@ -1,0 +1,25 @@
+services:
+  # Note: Test images are built using scripts/run-integration-tests.sh
+  # This ensures proper build order: base -> debug-base -> debug-apps -> integration-test
+  integration-test:
+    image: herm-test:latest
+    container_name: integration-test
+    ports:
+      # Aggregator
+      - "50051:50051"  # gRPC
+      - "8080:8080"    # REST
+      # Publishers
+      - "8085:8085"    # BBO
+      - "8082:8082"    # Price Bands
+      - "8083:8083"    # Volume Bands
+      # Mock Exchanges
+      - "8091:8091"    # Binance Mock
+      - "8092:8092"    # OKX Mock
+      - "8093:8093"    # Bybit Mock
+    volumes:
+      - ./test-results:/app/test-results
+      - ./logs:/app/logs
+    environment:
+      - PYTHONUNBUFFERED=1
+    working_dir: /app
+    command: ["python3", "tests/integration/testplan_e2e.py", "--pdf", "/app/test-results/testplan.pdf"]

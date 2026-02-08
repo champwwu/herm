@@ -1,0 +1,16 @@
+{
+  "app": {
+    "log": {
+      "file": "logs/demo_client.log",
+      "level": "info"
+    },
+    "rest_port": 8098
+  },
+  "server": {
+    "target": "localhost:50052"
+  },
+  "client": {
+    "request_interval_ms": 2000,
+    "message": "Hello from demo client"
+  }
+}

@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package herm.demo;
+
+// Demo service for showcasing ApplicationKernel with gRPC
+service DemoService {
+  // Echo request with timestamp
+  rpc Echo(EchoRequest) returns (EchoResponse);
+}
+
+message EchoRequest {
+  string message = 1;
+}
+
+message EchoResponse {
+  string message = 1;
+  int64 timestamp_us = 2;  // Unix timestamp in microseconds
+}

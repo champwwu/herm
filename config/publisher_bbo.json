@@ -1,0 +1,22 @@
+{
+  "app": {
+    "log": {
+      "file": "logs/publisher_bbo.log",
+      "level": "trace"
+    },
+    "rest_port": 8085,
+    "core_pinning": {
+      "enable": false,
+      "cores": [9, 10]
+    }
+  },
+  "strategy": {
+    "aggregator_server": "localhost:50051",
+    "subscribe": [
+      {
+        "request": "BBO",
+        "symbol_root": "BTCUSDT"
+      }
+    ]
+  }
+}

@@ -1,0 +1,95 @@
+services:
+  # Note: Images are built using scripts/docker-build.sh
+  # This ensures proper build order: base -> aggregator -> publisher
+  
+  aggregator:
+    image: herm-aggregator:latest
+    container_name: aggregator
+    ports:
+      - "50051:50051"  # gRPC
+      - "8080:8080"    # REST
+    volumes:
+      - ./config:/app/config:ro
+      - ./logs:/app/logs
+    command: ["./aggregator", "--config_file=config/aggregator.json"]
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8080/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+    networks:
+      - herm-network
+    restart: unless-stopped
+
+  # Use the pre-built publisher image for all publisher instances
+  publisher_bbo:
+    image: herm-publisher:latest
+    container_name: publisher-bbo
+    ports:
+      - "8085:8085"    # REST
+    volumes:
+      - ./config:/app/config:ro
+      - ./logs:/app/logs
+    command: ["./publisher", "--config_file=config/publisher_container_bbo.json"]
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8085/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+    depends_on:
+      aggregator:
+        condition: service_healthy
+    networks:
+      - herm-network
+    restart: unless-stopped
+
+  publisher_price_bands:
+    image: herm-publisher:latest
+    container_name: publisher-price-bands
+    ports:
+      - "8082:8082"    # REST
+    volumes:
+      - ./config:/app/config:ro
+      - ./logs:/app/logs
+    command: ["./publisher", "--config_file=config/publisher_container_price_bands.json"]
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8082/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+    depends_on:
+      aggregator:
+        condition: service_healthy
+    networks:
+      - herm-network
+    restart: unless-stopped
+
+  publisher_volume_bands:
+    image: herm-publisher:latest
+    container_name: publisher-volume-bands
+    ports:
+      - "8083:8083"    # REST
+    volumes:
+      - ./config:/app/config:ro
+      - ./logs:/app/logs
+    command: ["./publisher", "--config_file=config/publisher_container_volume_bands.json"]
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8083/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+    depends_on:
+      aggregator:
+        condition: service_healthy
+    networks:
+      - herm-network
+    restart: unless-stopped
+
+networks:
+  herm-network:
+    driver: bridge
+

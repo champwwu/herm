@@ -1,0 +1,19 @@
+{
+  "app": {
+    "log": {
+      "file": "logs/publisher_price_bands.log",
+      "level": "info"
+    },
+    "rest_port": 8082
+  },
+  "strategy": {
+    "aggregator_server": "localhost:50051",
+    "subscribe": [
+      {
+        "request": "PriceBand",
+        "symbol_root": "BTCUSDT",
+        "basis_points": [50, 100, 200, 500, 1000]
+      }
+    ]
+  }
+}
